@@ -30,13 +30,9 @@ export const CertificateDetailsPaths = {
         path: ["evidence", "0", "certificateId"],
         format: (data) => (data)
     },
-    "Beneficiary ID": {
+    "NIC Number": {
         path: ["credentialSubject", "refId"],
         format: (data) => (data)
-    },
-    "Date of Dose": {
-        path: ["evidence", "0", "effectiveStart"],
-        format: (data) => (formatDate(data))
     },
     "Vaccination at": {
         path: ["evidence", "0", "facility", "name"],

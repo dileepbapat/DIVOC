@@ -1,6 +1,7 @@
 {
   "name": "verification",
   "version": "0.1.0",
+  "homepage": "https://divoc.xiv.in/digi",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.11.4",
@@ -13,7 +14,7 @@
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1",
     "jszip": "^3.5.0",
-    "vaccination-context": "^1.0.7",
+    "vaccination-context": "^1.0.8",
     "axios": "^0.21.0",
     "jsonld-signatures": "^6.0.0",
     "ramda": "^0.27.1",

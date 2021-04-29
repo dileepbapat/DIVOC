@@ -31,7 +31,7 @@ const customLoader = url => {
         "https://w3id.org/security/v1": contexts.get("https://w3id.org/security/v1"),
         'https://www.w3.org/2018/credentials#': credentialsv1,
         "https://www.w3.org/2018/credentials/v1": credentialsv1,
-        "https://cowin.gov.in/credentials/vaccination/v1": vaccinationContext,
+        "https://divoc.lgcc.gov.lk/credentials/vaccination/v1": vaccinationContext,
     };
     let context = c[url];
     if (context === undefined) {
@@ -75,14 +75,14 @@ export const CertificateStatus = ({certificateData, goBack}) => {
                 const signedJSON = JSON.parse(certificateData);
                 const publicKey = {
                     '@context': jsigs.SECURITY_CONTEXT_URL,
-                    id: 'did:india',
+                    id: 'did:srilanka:moh',
                     type: 'RsaVerificationKey2018',
-                    controller: 'https://cowin.gov.in/',
+                    controller: 'https://divoc.lgcc.gov.lk/',
                     publicKeyPem: config.certificatePublicKey
                 };
                 const controller = {
                     '@context': jsigs.SECURITY_CONTEXT_URL,
-                    id: 'https://cowin.gov.in/',
+                    id: 'https://divoc.lgcc.gov.lk/',
                     publicKey: [publicKey],
                     // this authorizes this key to be used for making assertions
                     assertionMethod: [publicKey.id]
@@ -98,7 +98,7 @@ export const CertificateStatus = ({certificateData, goBack}) => {
                 });
                 if (result.verified) {
                     const revokedResponse = await checkIfRevokedCertificate(signedJSON)
-                    if (revokedResponse.response.status === 404) {
+                    if (revokedResponse.response.status !== 200) {
                         console.log('Signature verified.');
                         setValid(true);
                         setData(signedJSON);
@@ -141,14 +141,8 @@ export const CertificateStatus = ({certificateData, goBack}) => {
             return ""
         }
 
-        const dose = data["evidence"][0]["dose"]
-        const totalDoses = data["evidence"][0]["totalDoses"] || 2
 
-        if (dose === totalDoses) {
-            return "Final Certificate for COVID-19 Vaccination"
-        } else {
-            return "Provisional Certificate for COVID-19 Vaccination (1st Dose)"
-        }
+            return "COVID-19 Vaccination";
     }
     return (
         <div className="certificate-status-wrapper">
